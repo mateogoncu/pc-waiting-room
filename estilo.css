@@ -1,10 +1,71 @@
-:root{--bg:#F3EBDD;--fg:#14110F;--mut:#5B564F;--acc:#0F6E6A;--tick:#F2B632;--led:#E3342A;--line:#DCD2C0}
-@media (prefers-color-scheme:dark){:root{--bg:#0B1A1B;--fg:#EDE7DC;--mut:#A9B3B0;--acc:#6FD1C8;--line:#23403F}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-main{max-width:720px;margin:0 auto;padding:40px 16px 64px}
-header{display:flex;align-items:center;gap:14px;margin-bottom:28px}
-.t{width:46px;height:36px;border-radius:7px;background:var(--tick);color:var(--led);display:grid;place-items:center;font:900 15px/1 system-ui}
-h1{font-size:28px;line-height:1.15;margin:0}h2{font-size:20px;margin:28px 0 8px}
+:root{--bg:#F3EBDD;--fg:#14110F;--mut:#5B564F;--acc:#0F6E6A;--tick:#F2B632;--led:#D92D20;--ledbg:#FBE3DF;--amb:#9A6700;--ambbg:#FFF1CC;
+  --ok:#1E7F4F;--okbg:#DDF3E6;--line:#DCD2C0;--card:#FBF7EF;--chip:#ECE3D2;--board:#14181F;--boardfg:#FF3B2F}
+@media (prefers-color-scheme:dark){:root{--bg:#0B1A1B;--fg:#EDE7DC;--mut:#A9B3B0;--acc:#6FD1C8;--led:#FF6B5E;--ledbg:#3A1714;
+  --amb:#F2B632;--ambbg:#33280C;--ok:#5FD39A;--okbg:#0F2E20;--line:#23403F;--card:#112526;--chip:#1C3536;--board:#05090A}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:960px;margin:0 auto;padding:24px 16px 64px}
 a{color:var(--acc)}p,li{color:var(--fg)}.mut{color:var(--mut);font-size:15px}
+h1{font-size:28px;line-height:1.15;margin:0}h2{font-size:20px;line-height:1.25;margin:36px 0 10px}
+section{min-width:0}
+
+/* cabecera (también la usan privacy.html y terms.html) */
+header{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+.t{flex:none;width:46px;height:36px;border-radius:7px;background:var(--tick);color:var(--boardfg);display:grid;place-items:center;
+  font:900 15px/1 ui-monospace,Menlo,monospace}
 nav{display:flex;gap:16px;flex-wrap:wrap;margin:8px 0 28px;font-size:15px}
-footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);font-size:14px;color:var(--mut)}
+header.top{justify-content:space-between;flex-wrap:wrap;gap:10px 20px;margin-bottom:24px}
+header.top nav{margin:0}
+.marca{display:flex;align-items:center;gap:12px;color:inherit;text-decoration:none;min-width:0}
+.marca b{display:block;font-size:19px;line-height:1.2}.marca small{display:block;color:var(--mut);font-size:13px;line-height:1.3}
+
+/* estado del día */
+.estado{border-radius:18px;padding:22px 20px;border:2px solid;display:grid;gap:8px}
+.estado.no{background:var(--ledbg);border-color:var(--led)}.estado.no h1{color:var(--led)}
+.estado.rev{background:var(--ambbg);border-color:var(--amb)}.estado.rev h1{color:var(--amb)}
+.estado.si{background:var(--okbg);border-color:var(--ok)}.estado.si h1{color:var(--ok)}
+.estado.na{background:var(--card);border-color:var(--line)}
+.estado h1{font:900 clamp(28px,7vw,48px)/1.05 system-ui,sans-serif;letter-spacing:.01em}
+.estado p{margin:0}
+.dia{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.led{background:var(--board);color:var(--boardfg);font:700 15px/1 ui-monospace,Menlo,monospace;letter-spacing:.14em;padding:8px 10px;
+  border-radius:6px;text-shadow:0 0 6px rgba(255,59,47,.55)}
+blockquote{margin:6px 0 0;padding:10px 14px;border-left:4px solid var(--ok);background:var(--card);border-radius:0 8px 8px 0}
+
+/* chequeo oficial */
+.chequeo{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.chequeo li{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:start;background:var(--card);
+  border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.chequeo li div{display:grid;min-width:0}.chequeo li span{color:var(--mut);font-size:15px;overflow-wrap:anywhere}
+.chequeo time{color:var(--mut);font-size:13px;white-space:nowrap}
+.tilde{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:14px}
+.ok .tilde{background:var(--okbg);color:var(--ok)}.mal .tilde{background:var(--ledbg);color:var(--led)}
+
+/* lo que dice el video */
+.verif{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.verif li{display:flex;gap:10px;align-items:baseline}
+
+/* tarjetas de noticias */
+.tarjetas{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-top:12px}
+.tarjeta{display:grid;grid-template-columns:40px 1fr;grid-template-rows:auto 1fr auto;gap:4px 12px;padding:14px;border-radius:14px;
+  background:var(--card);border:1px solid var(--line);color:inherit;text-decoration:none;min-width:0;transition:transform .12s,border-color .12s}
+.tarjeta:hover,.tarjeta:focus-visible{border-color:var(--acc);transform:translateY(-2px)}
+.logo{grid-row:1/3;width:40px;height:40px;border-radius:10px;display:grid;place-items:center;color:#fff;font:800 14px/1 system-ui}
+.c0{background:#0F6E6A}.c1{background:#9A3B12}.c2{background:#3F4E9E}.c3{background:#7A3E8F}.c4{background:#2E6B2F}.c5{background:#8A6D00}
+.medio{font-size:13px;color:var(--mut);font-weight:600;overflow-wrap:anywhere}
+.titular{font-weight:650;line-height:1.35;overflow-wrap:anywhere}
+.tarjeta .pie{grid-column:1/3;display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.chip{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--chip);color:var(--fg);white-space:nowrap}
+.chip.ofi,.chip.confirmada{background:var(--okbg);color:var(--ok)}.chip.rum,.chip.rumor{background:var(--ambbg);color:var(--amb)}
+.chip.vid{background:var(--tick);color:#14110F}
+
+/* casillero de días */
+.casillas{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:6px}
+.casilla{display:grid;place-items:center;gap:2px;padding:8px 4px;border-radius:8px;text-decoration:none;font-family:ui-monospace,Menlo,monospace}
+.casilla small{font-size:10px;letter-spacing:.08em}.casilla b{font-size:15px}
+.casilla.no{background:var(--led);color:#fff}.casilla.rev{background:var(--amb);color:#fff}.casilla.si{background:var(--ok);color:#fff}
+.casilla.na{background:var(--chip);color:var(--mut)}
+.casilla[aria-current]{outline:3px solid var(--fg);outline-offset:2px}
+
+footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-size:14px;color:var(--mut)}
+@media (max-width:520px){.chequeo li{grid-template-columns:28px 1fr}.chequeo time{grid-column:2}}
